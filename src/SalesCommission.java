@@ -15,13 +15,57 @@ Sales Commission: 1.5%
 Total Sales: $65,000.00
 
 Total Earnings: $1184.38
-
  */
 
-public class SalesCommission {
+import javax.swing.*;
+import java.text.DecimalFormat;
 
-    public static void main(String[] args) {
+/*
+    1. get input - hourly rate, hours worked, sales commission percent, total sales
+    2. calculate pay without commission
+    3. calculate commission
+    4. calculate total
+    5. output results
+ */
+    public class SalesCommission {
 
-    }
+        public static void main(String[] args) {
+            double hourlyRate = getInput("What is your hourly rate?");
+            double hoursWorked = getInput("How many hours have you worked?");
+            double commissionPercent = getInput("What is your commission percent?");
+            double totalSales = getInput("What is your total sales?");
+
+            double payNoCom = payNoCom(hourlyRate, hoursWorked);
+            double commission = commission(commissionPercent, totalSales);
+
+            double totalEarnings = totalEarnings(payNoCom, commission);
+
+            output(totalEarnings);
+
+        }
+
+        public static double getInput(String prompt){
+
+            return Double.parseDouble(JOptionPane.showInputDialog(prompt));
+
+        }
+
+        public static double payNoCom(double hourlyRate, double hoursWorked){
+            return hourlyRate * hoursWorked;
+        }
+
+        public static double commission(double commissionPercent, double totalSales){
+            return totalSales * commissionPercent / 100.0;
+        }
+
+        public static double totalEarnings(double payNoCom, double commission){
+            return payNoCom + commission;
+        }
+
+        public static void output(double totalEarnings){
+
+            DecimalFormat round = new DecimalFormat("#,###.00");
+            JOptionPane.showMessageDialog(null, "Your total earnings: " + round.format(totalEarnings));
+        }
 
 }
